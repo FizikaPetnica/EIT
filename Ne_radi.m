@@ -33,12 +33,12 @@ syms ro11 ro21r ro21i ro22 ro31r ro31i ro32r ro32i ro33 ro41r ro41i ro42r ro42i 
 e1 = -(g1+gc)*ro33 - 1i*rabyc*(ro32r+1i*ro32i) - 1i*raby1*(ro43r-1i*ro43i) + 1i*rabyc*(ro32r-1i*ro32i) + 1i*raby1*(ro43r+1i*ro43i) == 0;
 e2 = gc*ro33 - gp*ro22 + 1i*rabyc*(ro32r+1i*ro32i) - 1i*rabyp*(ro21r+1i*ro21i) - 1i*rabyc*(ro32r-1i*ro32i) + 1i*rabyp*(ro21r-1i*ro21i) == 0;
 e3 = g1*ro33 - g2*ro44 + 1i*raby1*(ro43r-1i*ro43i) - 1i*raby2*(ro41r+1i*ro41i) - 1i*raby1*(ro43r+1i*ro43i) + 1i*raby2*(ro41r-1i*ro41i) == 0;
-e4 = -G32*(ro32r+1i*ro32i) - 1i*rabyc*(ro33-1i*ro22) - 1i*rabyp*(ro31r+1i*ro31i)*exp(-1i*fi) + 1i*raby1*(ro42r+1i*ro42i) == 0;
-e5 = -G34*(ro43r-1i*ro43i) - 1i*raby1*(ro33-1i*ro44) - 1i*raby2*(ro31r+1i*ro31i) + 1i*rabyc*(ro42r-1i*ro42i) + 1i*rabyp*(ro21r-1i*ro21i) == 0;
+e4 = -G32*(ro32r+1i*ro32i) - 1i*rabyc*(ro33-ro22) - 1i*rabyp*(ro31r+1i*ro31i)*exp(-1i*fi) + 1i*raby1*(ro42r+1i*ro42i) == 0;
+e5 = -G34*(ro43r-1i*ro43i) - 1i*raby1*(ro33-ro44) - 1i*raby2*(ro31r+1i*ro31i) + 1i*rabyc*(ro42r-1i*ro42i) + 1i*rabyp*(ro21r-1i*ro21i) == 0;
 e6 = -G31*(ro31r+1i*ro31i) - 1i*rabyp*(ro32r+1i*ro32i)*exp(-1i*fi) - 1i*raby2*(ro43r-1i*ro43i) + 1i*rabyc*(ro21r+1i*ro21i)*exp(-1i*fi) + 1i*raby1*(ro41r+1i*ro41i) == 0;
 e7 = -G24*(ro42r-1i*ro42i) + 1i*rabyc*(ro43r-1i*ro43i) - 1i*raby2*(ro21r+1i*ro21i)*exp(-1i*fi) - 1i*raby1*(ro32r-1i*ro32i) + 1i*rabyp*(ro41r-1i*ro41i)*exp(-1i*fi) == 0;
-e8 = -G21*(ro21r+1i*ro21i) - 1i*rabyp*(ro22-1i*ro11) + 1i*rabyc*(ro31r+1i*ro31i)*exp(1i*fi) - 1i*raby2*(ro42r-1i*ro42i)*exp(1i*fi) == 0;
-e9 = -G41*(ro41r+1i*ro41i) - 1i*raby2*(ro44-1i*ro11) + 1i*raby1*(ro31r+1i*ro31i) - 1i*rabyp*(ro42r+1i*ro42i)*exp(-1i*fi) == 0;
+e8 = -G21*(ro21r+1i*ro21i) - 1i*rabyp*(ro22-ro11) + 1i*rabyc*(ro31r+1i*ro31i)*exp(1i*fi) - 1i*raby2*(ro42r-1i*ro42i)*exp(1i*fi) == 0;
+e9 = -G41*(ro41r+1i*ro41i) - 1i*raby2*(ro44-ro11) + 1i*raby1*(ro31r+1i*ro31i) - 1i*rabyp*(ro42r+1i*ro42i)*exp(-1i*fi) == 0;
 e10 = ro11 + ro22 + ro33 + ro44 == 1;
 
 r = solve([e1, e2, e3, e4, e5, e6, e7, e8, e9, e10] ,...
