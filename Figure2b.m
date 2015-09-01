@@ -6,7 +6,7 @@ g(3) = 3;
 g(4) = 5;
 g(5) = 10;
 
-cc = hsv(5);    %boja grafika
+cc = hsv(5);
 
 n = 30;
 

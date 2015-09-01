@@ -6,7 +6,7 @@ R(3) = 3;
 R(4) = 5;
 R(5) = 10;
 
-cc = hsv(5);    %boja grafika
+cc = hsv(5);
 
 n = 20;
 
