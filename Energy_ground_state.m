@@ -1,8 +1,7 @@
-function [G, E, L] = Energy_levels (g, R, M, s)
+function [G,E,L] = Energy_ground_state (g, R, M, s)
 
-% g je jacina magnetnog polja, R je poluprecnik, M je magnetni kvantni broj, s je za simetrinju
-
-% G je matrica vrednosti talasnih f-ja, E su energije, L je lambda matrica
+% g je jacina magnetnog polja, R je poluprecnik,
+% M je magnetni kvantni broj, s je za simetrinju
 
 m = 15;
 n = m;
@@ -13,14 +12,14 @@ k = pi/(2*n+2);
 r = linspace(0,R,m+2);
 teta = linspace(0,pi/2,n+2);
 
-V = zeros(n+1, m+1);                    % potencijalna energija
-L = zeros(m*n, m*n);        
+V = zeros(n+1, m+1);                % potencijalna energija
+L = zeros(m*n, m*n);                % matrica lambda
 
 
 for i=2 : 1 : m+1
     for j=2 : 1 : n+1
         
-        V(i,j) = M*g + M^2/(r(i)^2*(sin(teta(j)))^2) + g^2/4*r(i)^2*(sin(teta(j)))^2 - 2/r(i);
+        V(i,j) = M*g + M^2/(r(i)^2*(sin(teta(j)))^2) + g^2/4*r(i)^2*(sin(teta(j)))^2;
         
         L( index(i,j,n) , index(i,j,n) ) = 2/h^2 + 2/(k^2*r(i)^2) + V(i,j);
   
@@ -53,6 +52,6 @@ for i=2 : 1 : m+1
     end
 end
 
-[G,E] = eig(L);
+[G,E] = eig(L);             % G je matrica talasnih f-ja, a E su energije
 
 end
