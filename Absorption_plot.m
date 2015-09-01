@@ -1,7 +1,7 @@
-function Absorption_plot
+function alpha = Absorption_plot (g, g12, g23)
 
-n = 300;
-opseg = 2;
+n = 100;
+opseg = 1;
 
 d12 = linspace(-opseg,opseg,n);
 alpha = zeros(1,n);
@@ -18,30 +18,28 @@ m3 = 2;
 s3 = 1;
 k3 = 1;
 
-[dx,dy,dz] = Transition_dipole (m1,s1,k1,m2,s2,k2);
+[dx,dy,dz] = Transition_dipole (g,m1,s1,k1,m2,s2,k2);
 d = dx^2+dy^2+dz^2;
-
-lambda6 = [0 0 0 ; 0 0 1 ; 0 1 0];
 
 hbar = 1;
 eps = 1/(4*pi);
 
-G21 = SEmission (m2,s2,k2, m1,s1,k1);
-G32 = SEmission (m3,s3,k3, m2,s2,k2);
+G21 = Spontaneous_decay (g,m2,s2,k2, m1,s1,k1);
+G32 = Spontaneous_decay (g,m3,s3,k3, m2,s2,k2);
 
 %G32 = 0.15;
 %G21 = 0.01;
 
-pom = zeros(1,n);
+%g12 = 0.0001;
+%g23 = .5;
+
 
 for i=1 : n
-    ro = OBE(d12(i), G21, G32);
+    ro = Density_matrix_3level(d12(i), G21, G32, g12, g23);
     ro = ro/trace(ro);
-    pom(i) = ro(3,3);
-    alpha(i) = d/(2*eps*hbar)*trace(ro*lambda6);
+    alpha(i) = d/(2*eps*hbar)*1i*(ro(2,1)-ro(1,2));
 end
 
-%plot(d12,abs(alpha));
-plot(d12,pom);
+% plot(d12,alpha);
 
 end
