@@ -1,4 +1,4 @@
-function ro = Density_matrix_4level_linsolve(dp,fi)
+function [ro,A,B,X] = Density_matrix_4level_linsolve(dp,fi,rabyc)
 
 % f-ja za odredjivanje matrice gustine za sistem od 4 nivoa
 % ulazni parametar je detuning za probe laser
@@ -15,11 +15,13 @@ dc = 0;                                 % detuning
 d1 = 0;
 d2 = dp+dc-d1;
 
-rabyc = 10;                             % Rabijeve frekvencije
+% rabyc = 10;                             % Rabijeve frekvencije
 rabyp = 0.05;
 raby1 = 10;
 raby2 = 1;
 
+% A = zeros(16,16);
+% B = zeros(16,1);
 
 A = zeros(17,16);
 B = zeros(17,1);
@@ -61,7 +63,7 @@ A(7,:) = [0, 0, 1i*exp(-1i*fi)*rabyp, 0, ...
           0, 0, 0, 0];
 
 A(8,:) = [0, 0, 0, 1i*exp(-1i*fi)*rabyp, ...
-          -1i*exp(-1i*fi)*raby2, 0, -1i*raby1, 1/2*(g2+gp)-1i*(dp-d2), ...
+          -1i*exp(-1i*fi)*raby2, 0, -1i*raby1, -1/2*(g2+gp)-1i*(dp-d2), ...
           0, 0, 0, 1i*rabyc, ...
           0, 0, 0, 0];
 
@@ -106,14 +108,21 @@ A(16,:) = [0, 0, 0, 1i*raby2, ...
           -1i*raby2, 0, -1i*raby1, -g2];
 
 A(17,:) = [1, 0, 0, 0, ...
-          0, 1, 0, 0, ...
-          0, 0, 1, 0, ...
-          0, 0, 0, 1];
+           0, 1, 0, 0, ...
+           0, 0, 1, 0, ...
+           0, 0, 0, 1];
 
 B(17) = 1;
 
 X = linsolve(A,B);
+% X = A\B;
+% X = null(A);
+
 
 ro = vec2mat(X,4);
+
+% 
+% det(A)
+% trace(ro)
 
 end
